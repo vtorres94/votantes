@@ -8,9 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 import { getEntities } from './c-defensor-voto.reducer';
 import { ICDefensorVoto } from 'app/shared/model/c-defensor-voto.model';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT, AUTHORITIES } from 'app/config/constants';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { getUser as getUsuarios } from 'app/modules/administration/user-management/user-management.reducer';
 
 export interface ICDefensorVotoProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
@@ -20,7 +22,10 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
   );
 
   const getAllEntities = () => {
-    props.getEntities(paginationState.activePage - 1, paginationState.itemsPerPage, `${paginationState.sort},${paginationState.order}`);
+    props.getUsuarios(props.user.id);
+    let query;
+    props.isAdmin ? (query = '') : (query = '&clienteId.equals=' + props.user.clienteId);
+    props.getEntities(query, 0, 1000, 'nombre,asc');
   };
 
   const sortEntities = () => {
@@ -231,14 +236,17 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
   );
 };
 
-const mapStateToProps = ({ cDefensorVoto }: IRootState) => ({
-  cDefensorVotoList: cDefensorVoto.entities,
-  loading: cDefensorVoto.loading,
-  totalItems: cDefensorVoto.totalItems,
+const mapStateToProps = (storeState: IRootState) => ({
+  cDefensorVotoList: storeState.cDefensorVoto.entities,
+  loading: storeState.cDefensorVoto.loading,
+  totalItems: storeState.cDefensorVoto.totalItems,
+  user: storeState.userManagement.user,
+  isAdmin: hasAnyAuthority(storeState.authentication.account.authorities, [AUTHORITIES.ADMIN]),
 });
 
 const mapDispatchToProps = {
   getEntities,
+  getUsuarios,
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

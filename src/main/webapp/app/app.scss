@@ -5,10 +5,11 @@
 @import '~bootswatch/dist/cyborg/bootswatch';
 body {
   margin: 0;
+  background-color: #fff;
 }
 
 a {
-  color: #533f03;
+  color: #000;
   font-weight: bold;
 }
 
@@ -23,6 +24,7 @@ a {
 }
 
 .app-container {
+  background-color: #fff;
   box-sizing: border-box;
   .view-container {
     width: 100%;

@@ -863,7 +863,7 @@
                                     <goal>npm</goal>
                                 </goals>
                             </execution>
-                            <execution>
+                            <!-- <execution>
                                 <id>webapp build dev</id>
                                 <goals>
                                     <goal>npm</goal>
@@ -876,7 +876,7 @@
                                     </environmentVariables>
                                     <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
                                 </configuration>
-                            </execution>
+                            </execution> -->
                         </executions>
                     </plugin>
                 </plugins>

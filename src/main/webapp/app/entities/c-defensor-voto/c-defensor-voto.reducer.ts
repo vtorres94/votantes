@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
+import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction, ICrudSearchAction } from 'react-jhipster';
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
@@ -105,8 +105,8 @@ const apiUrl = 'api/c-defensor-votos';
 
 // Actions
 
-export const getEntities: ICrudGetAllAction<ICDefensorVoto> = (page, size, sort) => {
-  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
+export const getEntities: ICrudSearchAction<ICDefensorVoto> = (search, page, size, sort) => {
+  const requestUrl = `${apiUrl}${sort ? `?borrado.equals=0&page=${page}&size=${size}&sort=${sort}${search}` : ''}`;
   return {
     type: ACTION_TYPES.FETCH_CDEFENSORVOTO_LIST,
     payload: axios.get<ICDefensorVoto>(`${requestUrl}${sort ? '&' : '?'}cacheBuster=${new Date().getTime()}`),

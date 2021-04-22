@@ -1,4 +1,4 @@
-$header-color: #fff;
+$header-color: rgb(0, 0, 0);
 $header-color-secondary: #bbb;
 $header-color-hover: darken($header-color, 20%);
 
@@ -22,7 +22,7 @@ Developement Ribbon
   pointer-events: none;
   opacity: 0.75;
   a {
-    color: #fff;
+    color: rgb(0, 0, 0);
     display: block;
     font-weight: 400;
     margin: 1px 0;
@@ -34,6 +34,14 @@ Developement Ribbon
   }
 }
 
+.navbarBg {
+  background-color: #fff;
+  color: black;
+}
+
+.menu-item {
+  color: black;
+}
 /* ==========================================================================
 Navbar styles
 ========================================================================== */
@@ -48,6 +56,7 @@ Navbar styles
     text-decoration: none;
   }
   .brand-icon {
+    margin-left: 10px;
     height: 35px;
     width: auto;
     display: inline-block;

@@ -3,7 +3,7 @@ import { Switch } from 'react-router-dom';
 
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 
-import CDefensorVoto from './c-defensor-voto';
+import CDefensorVoto from './defensorVoto';
 import CDefensorVotoDetail from './c-defensor-voto-detail';
 import CDefensorVotoUpdate from './c-defensor-voto-update';
 import CDefensorVotoDeleteDialog from './c-defensor-voto-delete-dialog';
