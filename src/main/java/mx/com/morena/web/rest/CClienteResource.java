@@ -19,10 +19,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -155,10 +155,15 @@ public class CClienteResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cClientes in body.
      */
     @GetMapping("/c-clientes")
-    public ResponseEntity<List<CClienteDTO>> getAllCClientes(CClienteCriteria criteria, Pageable pageable) {
+    public ResponseEntity<List<CClienteDTO>> getAllCDefensorVotos(
+        CClienteCriteria criteria,
+        Pageable pageable,
+        @RequestParam MultiValueMap<String, String> queryParams,
+        UriComponentsBuilder uriBuilder
+    ) {
         log.debug("REST request to get CClientes by criteria: {}", criteria);
         Page<CClienteDTO> page = cClienteQueryService.findByCriteria(criteria, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
