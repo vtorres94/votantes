@@ -53,6 +53,7 @@ public class UserMapper {
             user.setImageUrl(userDTO.getImageUrl());
             user.setActivated(userDTO.isActivated());
             user.setLangKey(userDTO.getLangKey());
+            user.setClienteId(userDTO.getClienteId());
             Set<Authority> authorities = this.authoritiesFromStrings(userDTO.getAuthorities());
             user.setAuthorities(authorities);
             return user;
@@ -127,6 +128,7 @@ public class UserMapper {
         UserDTO userDto = new UserDTO();
         userDto.setId(user.getId());
         userDto.setLogin(user.getLogin());
+        userDto.setClienteId(user.getClienteId());
         return userDto;
     }
 
