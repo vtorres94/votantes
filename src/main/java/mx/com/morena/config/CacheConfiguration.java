@@ -48,6 +48,9 @@ public class CacheConfiguration {
             createCache(cm, mx.com.morena.domain.User.class.getName());
             createCache(cm, mx.com.morena.domain.Authority.class.getName());
             createCache(cm, mx.com.morena.domain.User.class.getName() + ".authorities");
+            createCache(cm, mx.com.morena.domain.CCliente.class.getName());
+            createCache(cm, mx.com.morena.domain.CDefensorVoto.class.getName());
+            createCache(cm, mx.com.morena.domain.CVotante.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -41,6 +41,8 @@
     "packageFolder": "mx/com/morena",
     "jwtSecretKey": "ZDYwOWM5NmViODk2ZDI0MTNmMmY0YzUzNDM2NzY0ZjI5ZmJjODhlODUyMmFmMDkyMmI0YWMzNzMxOTZhZDJhOWFlNDg1OWJmZWM0NzFiYmMzYzFhYjE3MDAyYTcwMTkxZmEzZmNmM2RkYzdlODQ0MjI5YjA2YmY2OWRkNTMxZjc=",
     "clientPackageManager": "npm",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": ["CCliente", "CDefensorVoto", "CVotante"],
+    "lastLiquibaseTimestamp": 1619061297000
   }
 }

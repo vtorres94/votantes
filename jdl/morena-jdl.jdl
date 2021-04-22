@@ -1,0 +1,69 @@
+entity CCliente {
+    claveCliente String maxlength(10),
+    cliente String maxlength(60),
+    anioElectoral Integer max(9999),
+    idUsuarioCreacion Long required max(999999999999),
+    fechaCreacion Instant required,
+    idUsuarioActualizacion Long max(999999999999),
+    fechaActualizacion Instant,
+    notas String maxlength(300),
+    estatus Integer required max(1),
+    borrado Integer required max(1)
+}
+
+entity CDefensorVoto {
+	nombreCompleto String maxlength(60) required,
+    nombre String maxlength(30) required,
+    segundoNombre String maxlength(30),
+    apellidoPaterno String maxlength(30) required,
+    segundoMaterno String maxlength(30),
+    edad Integer max(999),
+    telefono String maxlength(16),
+    claveElector String maxlength(30),
+    seccionElectoral Integer max(999999),
+    calle String maxlength(80),
+    numExt String maxlength(30),
+    colonia String maxlength(80),
+    cp Integer max(999999),
+    municipio String maxlength(80),
+    estado String maxlength(80),
+    estatus Integer required max(1),
+    borrado Integer required max(1)
+}
+entity CVotante {
+    nombreCompleto String maxlength(60) required,
+    nombre String maxlength(30) required,
+    segundoNombre String maxlength(30),
+    apellidoPaterno String maxlength(30) required,
+    segundoMaterno String maxlength(30),
+    edad Integer max(999),
+    telefono String maxlength(16),
+    claveElector String maxlength(30),
+    seccionElectoral Integer max(999999),
+    calle String maxlength(80),
+    numExt String maxlength(30),
+    colonia String maxlength(80),
+    cp Integer max(999999),
+    municipio String maxlength(80),
+    estado String maxlength(80),
+    estatus Integer required max(1),
+    borrado Integer required max(1)
+}
+relationship ManyToOne {
+	CDefensorVoto{cliente(cliente)} to CCliente,
+	CVotante{cliente(cliente)} to CCliente,
+    CVotante{defensorVoto(nombreCompleto)} to CDefensorVoto,
+
+}
+
+//Generar un DTO con MaphStruct
+dto * with mapstruct
+
+// Generar servicios sin interfaz
+service * with serviceClass
+
+// Generar opciones de paginación
+paginate * with pagination
+
+// Generar opciones de filtrado
+filter *

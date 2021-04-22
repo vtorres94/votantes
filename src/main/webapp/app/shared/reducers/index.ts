@@ -11,6 +11,18 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+// prettier-ignore
+import cCliente, {
+  CClienteState
+} from 'app/entities/c-cliente/c-cliente.reducer';
+// prettier-ignore
+import cDefensorVoto, {
+  CDefensorVotoState
+} from 'app/entities/c-defensor-voto/c-defensor-voto.reducer';
+// prettier-ignore
+import cVotante, {
+  CVotanteState
+} from 'app/entities/c-votante/c-votante.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -23,6 +35,9 @@ export interface IRootState {
   readonly passwordReset: PasswordResetState;
   readonly password: PasswordState;
   readonly settings: SettingsState;
+  readonly cCliente: CClienteState;
+  readonly cDefensorVoto: CDefensorVotoState;
+  readonly cVotante: CVotanteState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -37,6 +52,9 @@ const rootReducer = combineReducers<IRootState>({
   passwordReset,
   password,
   settings,
+  cCliente,
+  cDefensorVoto,
+  cVotante,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

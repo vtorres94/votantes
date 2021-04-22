@@ -1,0 +1,73 @@
+{
+  "name": "CCliente",
+  "fields": [
+    {
+      "fieldName": "claveCliente",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "cliente",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "60"
+    },
+    {
+      "fieldName": "anioElectoral",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["max"],
+      "fieldValidateRulesMax": "9999"
+    },
+    {
+      "fieldName": "idUsuarioCreacion",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "max"],
+      "fieldValidateRulesMax": "999999999999"
+    },
+    {
+      "fieldName": "fechaCreacion",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "idUsuarioActualizacion",
+      "fieldType": "Long",
+      "fieldValidateRules": ["max"],
+      "fieldValidateRulesMax": "999999999999"
+    },
+    {
+      "fieldName": "fechaActualizacion",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "notas",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "300"
+    },
+    {
+      "fieldName": "estatus",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "max"],
+      "fieldValidateRulesMax": "1"
+    },
+    {
+      "fieldName": "borrado",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "max"],
+      "fieldValidateRulesMax": "1"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "c_cliente",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210422031455"
+}
