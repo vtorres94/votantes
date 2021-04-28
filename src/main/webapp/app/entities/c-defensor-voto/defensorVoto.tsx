@@ -54,14 +54,6 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
     setState,
   ] = useState<ICDefensorVotoState>();
 
-  const toggleActive = cum => () => {
-    updateEntity({
-      ...cum,
-      estatus: !cum.estatus === true ? 1 : 0,
-    });
-    // getEntities();
-  };
-
   useEffect(() => {
     loadEntities();
     props.getCClientes();
@@ -100,38 +92,14 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
       ? props.getEntities('', 0, 1000, 'nombre,asc')
       : props.getEntities('&clienteId.equals=' + props.account.clienteId, 0, 1000, 'nombre,asc');
   };
-  const estatus = (cell, row, enumObject, rowIndex) => {
-    let vista;
-    // tslint:disable-next-line:switch-default
-    switch (row.estatus) {
-      case 0:
-        vista = <Label size="mini">{/* <Icon name="calendar" /> */} Inactivo</Label>;
-        break;
-      case 1:
-        vista = (
-          <Label color="green" size="mini">
-            Activo
-          </Label>
-        );
-        break;
-      default:
-        break;
-    }
-    return (
-      <div>
-        <Label.Group fluid tag>
-          {vista}
-        </Label.Group>
-      </div>
-    );
-  };
+
   const handleClick = (e, titleProps) => {
     const { activeIndex } = state;
     const { index } = titleProps;
     const newIndex = activeIndex === index ? -1 : index;
-
     setState({ ...state, activeIndex: newIndex });
   };
+
   const handleChangeInput = (e, { name, value, min, max, pattern }) => {
     switch (name) {
       case 'id':
@@ -165,6 +133,7 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
         break;
     }
   };
+
   const { defensoresVotoList, match, user, account, isAdmin, cClientes } = props;
   const {
     activeIndex,
@@ -197,8 +166,8 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: () => {
         return {
-          width: '10%',
           textAlign: 'center',
+          width: '100px',
         };
       },
     },
@@ -208,14 +177,14 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
       text: 'Clave de Elector',
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '10%', textAlign: 'center' };
+        return { textAlign: 'center', width: '200px' };
       },
     },
     {
       align: 'center',
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '15%', textAlign: 'center' };
+        return { textAlign: 'center', width: '200px' };
       },
       dataField: 'nombreCompleto',
       text: 'Nombre',
@@ -224,7 +193,7 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
       align: 'center',
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '15%', textAlign: 'center' };
+        return { textAlign: 'center', width: '100px' };
       },
       dataField: 'telefono',
       text: 'Teléfono',
@@ -233,7 +202,7 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
       align: 'center',
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '15%', textAlign: 'center' };
+        return { textAlign: 'center', width: '100px' };
       },
       dataField: 'seccionElectoral',
       text: 'Sección Electoral',
@@ -242,7 +211,7 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
       align: 'center',
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '15%', textAlign: 'center' };
+        return { textAlign: 'center', width: '200px' };
       },
       dataField: 'calle',
       text: 'Calle',
@@ -251,16 +220,25 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
       align: 'center',
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '15%', textAlign: 'center' };
+        return { textAlign: 'center', width: '100px' };
       },
       dataField: 'numExt',
-      text: 'Domicilio',
+      text: 'No. ext',
     },
     {
       align: 'center',
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '15%', textAlign: 'center' };
+        return { textAlign: 'center', width: '150px' };
+      },
+      dataField: 'colonia',
+      text: 'Colonia',
+    },
+    {
+      align: 'center',
+      // tslint:disable-next-line:ter-arrow-body-style
+      headerStyle: (colum, colIndex) => {
+        return { textAlign: 'center', width: '100px' };
       },
       dataField: 'cp',
       text: 'CP',
@@ -269,7 +247,7 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
       align: 'center',
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '16%', textAlign: 'center' };
+        return { textAlign: 'center', width: '100px' };
       },
       dataField: 'cliente.cliente',
       text: 'Cliente',
@@ -278,7 +256,7 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
     {
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '10%', textAlign: 'center' };
+        return { textAlign: 'center', width: '150px' };
       },
       dataField: 'estatus',
       isDummyField: true,
@@ -305,7 +283,7 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
     {
       // tslint:disable-next-line:ter-arrow-body-style
       headerStyle: (colum, colIndex) => {
-        return { width: '15%', textAlign: 'center' };
+        return { textAlign: 'center', width: '200px' };
       },
       dataField: 'accion',
       isDummyField: true,
@@ -318,7 +296,6 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
           <div className="col-lg-12">
             <Button.Group fluid>
               <Button
-                // onClick={openHistoriaClinica}
                 as={Link}
                 to={`${match.url}/${row.id}`}
                 circular
@@ -326,6 +303,15 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
                 title="Consultar"
                 // disabled={inventarioList.length > 0 ? false : true}
                 color="blue"
+              />
+              <Button
+                as={Link}
+                to={`${match.url}/votantes/${row.id}`}
+                circular
+                icon="list"
+                title="Votantes"
+                // disabled={inventarioList.length > 0 ? false : true}
+                color="green"
               />
               {props.isAdmin ? (
                 <Button
@@ -551,7 +537,7 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
                           icon="search"
                           title="Buscar"
                           // tslint:disable-next-line:jsx-no-lambda
-                          onClick={() => loadEntities()}
+                          onClick={loadEntities}
                           // disabled={clienteId != null && fechaInicio != null && fechaFin != null && proveedorId != null ? false : true}
                           // color={fechaInicio != null && fechaFin != null ? 'green' : 'grey'}
                         />
@@ -568,34 +554,46 @@ export const CDefensorVoto = (props: ICDefensorVotoProps) => {
         </div>
       </div>
       &nbsp;
-      <Segment>
-        {props.isAdmin ? (
-          <Button as={Link} to={`${match.url}/new`} circular icon="add" floated="right" toggle title="Crear" color="facebook" size="big" />
-        ) : null}
-        <ToolkitProvider
-          className="table table-hover table-sm table-striped card"
-          keyField="id"
-          pagination={paginationFactory(options)}
-          selectRow={selectRow}
-          data={defensoresVotoList ? defensoresVotoList : null}
-          columns={columns}
-          columnToggle
-        >
-          {propss => (
-            <div>
-              <CustomToggleList {...propss.columnToggleProps} />
-              <hr />
-              <BootstrapTable
-                {...propss.baseProps}
-                selectRow={selectRow}
-                pagination={paginationFactory(options)}
-                // id="table-next"
-                noDataIndication="No existen registros"
-              />
-            </div>
-          )}
-        </ToolkitProvider>
-      </Segment>
+      <div className="row" style={{ overflow: 'auto' }}>
+        <React.Fragment>
+          {props.isAdmin ? (
+            <Button
+              as={Link}
+              to={`${match.url}/new`}
+              circular
+              icon="add"
+              floated="right"
+              toggle
+              title="Crear"
+              color="facebook"
+              size="big"
+            />
+          ) : null}
+          <ToolkitProvider
+            className="table table-hover table-striped card"
+            keyField="id"
+            pagination={paginationFactory(options)}
+            selectRow={selectRow}
+            data={defensoresVotoList ? defensoresVotoList : null}
+            columns={columns}
+            columnToggle
+          >
+            {propss => (
+              <div>
+                <CustomToggleList {...propss.columnToggleProps} />
+                <hr />
+                <BootstrapTable
+                  {...propss.baseProps}
+                  selectRow={selectRow}
+                  pagination={paginationFactory(options)}
+                  // id="table-next"
+                  noDataIndication="No existen registros"
+                />
+              </div>
+            )}
+          </ToolkitProvider>
+        </React.Fragment>
+      </div>
     </div>
   );
 };
