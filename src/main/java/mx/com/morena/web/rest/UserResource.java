@@ -13,6 +13,7 @@ import mx.com.morena.security.AuthoritiesConstants;
 import mx.com.morena.service.MailService;
 import mx.com.morena.service.UserService;
 import mx.com.morena.service.dto.AdminUserDTO;
+import mx.com.morena.service.dto.UserDTO;
 import mx.com.morena.web.rest.errors.BadRequestAlertException;
 import mx.com.morena.web.rest.errors.EmailAlreadyUsedException;
 import mx.com.morena.web.rest.errors.LoginAlreadyUsedException;
@@ -196,5 +197,28 @@ public class UserResource {
             .noContent()
             .headers(HeaderUtil.createAlert(applicationName, "A user is deleted with identifier " + login, login))
             .build();
+    }
+
+    /**
+     * {@code PUT /users} : Updates an existing User.
+     *
+     * @param userDTO the user to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated user.
+     * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already in use.
+     * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already in use.
+     */
+    @PutMapping("/users/updatePassword")
+    public ResponseEntity<UserDTO> updatePassword(@Valid @RequestBody UserDTO userDTO) {
+        log.debug("REST request to update User : {}", userDTO);
+        Optional<User> existingUser = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase());
+        if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
+            throw new LoginAlreadyUsedException();
+        }
+        Optional<UserDTO> updatedUser = userService.updatePassword(userDTO);
+
+        return ResponseUtil.wrapOrNotFound(
+            updatedUser,
+            HeaderUtil.createAlert(applicationName, "userManagement.updated", userDTO.getId().toString())
+        );
     }
 }

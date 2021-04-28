@@ -13,6 +13,8 @@ public class UserDTO {
 
     private Long clienteId;
 
+    private String password;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -46,6 +48,14 @@ public class UserDTO {
 
     public void setClienteId(Long clienteId) {
         this.clienteId = clienteId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     // prettier-ignore

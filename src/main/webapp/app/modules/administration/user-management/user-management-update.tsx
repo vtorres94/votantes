@@ -8,14 +8,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getUser, getRoles, updateUser, createUser, reset } from './user-management.reducer';
 import { IRootState } from 'app/shared/reducers';
+import { IUser } from 'app/shared/model/user.model';
+import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 
 export interface IUserManagementUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {}
 
+export interface IUserState {
+  isNew: boolean;
+  password: string;
+  user: IUser;
+}
 export const UserManagementUpdate = (props: IUserManagementUpdateProps) => {
-  const [isNew] = useState(!props.match.params || !props.match.params.login);
+  const [state, setState] = useState<IUserState>({
+    isNew: !props.match.params || !props.match.params.login,
+    password: '',
+    user: null,
+  });
 
   useEffect(() => {
-    if (isNew) {
+    if (state.isNew) {
       props.reset();
     } else {
       props.getUser(props.match.params.login);
@@ -31,12 +42,33 @@ export const UserManagementUpdate = (props: IUserManagementUpdateProps) => {
   };
 
   const saveUser = (event, values) => {
-    if (isNew) {
-      props.createUser(values);
+    if (state.isNew) {
+      setState({
+        ...state,
+        user: {
+          ...values,
+          password: state.password,
+          clienteId: 1,
+        },
+      });
+      props.createUser(user);
     } else {
-      props.updateUser(values);
+      setState({
+        ...state,
+        user: {
+          ...values,
+          password: state.password,
+          clienteId: props.account.clienteId,
+        },
+      });
+      props.updateUser(user);
+      // props.updateUserPassword(state.user, props.account.clienteId);
     }
     handleClose();
+  };
+
+  const updatePassword = event => {
+    setState({ ...state, password: event.target.value });
   };
 
   const isInvalid = false;
@@ -86,6 +118,36 @@ export const UserManagementUpdate = (props: IUserManagementUpdateProps) => {
                     },
                   }}
                   value={user.login}
+                />
+              </AvGroup>
+              <AvGroup>
+                <AvField
+                  name="password"
+                  label={'Password'}
+                  placeholder={'Password'}
+                  type="password"
+                  onChange={updatePassword}
+                  validate={{
+                    required: { value: true, errorMessage: 'Este campo no puede estar vacío' },
+                    minLength: { value: 6, errorMessage: 'Tiene que tener más de 6 caracteres' },
+                    maxLength: { value: 50, errorMessage: 'No puede tener más de 50 caracteres' },
+                  }}
+                  value={user.password}
+                />
+              </AvGroup>
+              <AvGroup>
+                <PasswordStrengthBar password={state.password} />
+                <AvField
+                  name="secondPassword"
+                  label={'Confirmar contraseña'}
+                  placeholder={'Password'}
+                  type="password"
+                  validate={{
+                    required: { value: true, errorMessage: 'Este campo no puede estar vacío' },
+                    minLength: { value: 6, errorMessage: 'Tiene que tener más de 6 caracteres' },
+                    maxLength: { value: 50, errorMessage: 'No puede tener más de 50 caracteres' },
+                    match: { value: 'password', errorMessage: 'Las contraseñas no coinciden' },
+                  }}
                 />
               </AvGroup>
               <AvGroup>
@@ -183,6 +245,7 @@ const mapStateToProps = (storeState: IRootState) => ({
   roles: storeState.userManagement.authorities,
   loading: storeState.userManagement.loading,
   updating: storeState.userManagement.updating,
+  account: storeState.authentication.account,
 });
 
 const mapDispatchToProps = { getUser, getRoles, updateUser, createUser, reset };

@@ -342,4 +342,22 @@ public class UserService {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
         }
     }
+
+    public Optional<UserDTO> updatePassword(UserDTO userDTO) {
+        String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
+        return Optional
+            .of(userRepository.findById(userDTO.getId()))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .map(
+                user -> {
+                    this.clearUserCaches(user);
+                    user.setPassword(encryptedPassword);
+                    this.clearUserCaches(user);
+                    log.debug("Changed Information for User: {}", user);
+                    return user;
+                }
+            )
+            .map(UserDTO::new);
+    }
 }
