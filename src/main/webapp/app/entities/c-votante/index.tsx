@@ -7,7 +7,6 @@ import CVotante from './c-votante';
 import CVotanteDetail from './c-votante-detail';
 import CVotanteUpdate from './c-votante-update';
 import CVotanteDeleteDialog from './c-votante-delete-dialog';
-
 const Routes = ({ match }) => (
   <>
     <Switch>

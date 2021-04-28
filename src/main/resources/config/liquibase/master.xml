@@ -18,6 +18,7 @@
     <include file="config/liquibase/changelog/20210516024001_added_entity_CVotante.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210516024001_added_entity_CDefensorVoto.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210417182659_added_entity_CCliente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210428114955_added_entity_CAgenda.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20210516024001_added_entity_constraints_CVotante.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210516024001_added_entity_constraints_CDefensorVoto.xml" relativeToChangelogFile="false"/>

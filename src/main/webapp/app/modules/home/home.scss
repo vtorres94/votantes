@@ -9,3 +9,36 @@ Main page styles
   background-size: contain;
   background-color: #fff;
 }
+
+.defensor {
+  display: flex;
+  align-items: center;
+  width: 500px;
+  height: 500px;
+  background: url('../../../content/images/sword.svg') no-repeat center;
+  background-size: auto;
+  background-color: #b4241c !important;
+  border-radius: 5%;
+}
+
+.defensor:hover {
+  border: 5px solid black;
+}
+
+.votante {
+  border-radius: 5%;
+}
+
+.votante:hover {
+  background-color: #b4241c !important;
+  border: 5px solid black;
+  color: #fff !important;
+}
+
+.home-header {
+  color: #fff !important;
+  font-size: 32pt;
+  font-family: 'Futura Std, pantone 1805C';
+  text-align: center;
+  font-weight: bold;
+}

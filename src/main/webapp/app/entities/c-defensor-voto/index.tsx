@@ -7,6 +7,7 @@ import CDefensorVoto from './defensorVoto';
 import CDefensorVotoDetail from './c-defensor-voto-detail';
 import CDefensorVotoUpdate from './c-defensor-voto-update';
 import CDefensorVotoDeleteDialog from './c-defensor-voto-delete-dialog';
+import CVotante from '../c-votante';
 
 const Routes = ({ match }) => (
   <>
@@ -14,6 +15,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute exact path={`${match.url}/new`} component={CDefensorVotoUpdate} />
       <ErrorBoundaryRoute exact path={`${match.url}/:id/edit`} component={CDefensorVotoUpdate} />
       <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={CDefensorVotoDetail} />
+      <ErrorBoundaryRoute exact path={`${match.url}/votantes/:defensorVotoId`} component={CVotante} />
       <ErrorBoundaryRoute path={match.url} component={CDefensorVoto} />
     </Switch>
     <ErrorBoundaryRoute exact path={`${match.url}/:id/delete`} component={CDefensorVotoDeleteDialog} />

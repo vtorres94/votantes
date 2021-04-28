@@ -42,7 +42,7 @@
     "jwtSecretKey": "ZDYwOWM5NmViODk2ZDI0MTNmMmY0YzUzNDM2NzY0ZjI5ZmJjODhlODUyMmFmMDkyMmI0YWMzNzMxOTZhZDJhOWFlNDg1OWJmZWM0NzFiYmMzYzFhYjE3MDAyYTcwMTkxZmEzZmNmM2RkYzdlODQ0MjI5YjA2YmY2OWRkNTMxZjc=",
     "clientPackageManager": "npm",
     "languages": ["en", "fr"],
-    "entities": ["CCliente", "CDefensorVoto", "CVotante"],
+    "entities": ["CCliente", "CDefensorVoto", "CVotante", "CAgenda"],
     "lastLiquibaseTimestamp": 1619061297000
   }
 }

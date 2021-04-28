@@ -23,6 +23,10 @@ import cDefensorVoto, {
 import cVotante, {
   CVotanteState
 } from 'app/entities/c-votante/c-votante.reducer';
+// prettier-ignore
+import cAgenda, {
+  CAgendaState
+} from 'app/entities/c-agenda/c-agenda.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -38,6 +42,7 @@ export interface IRootState {
   readonly cCliente: CClienteState;
   readonly cDefensorVoto: CDefensorVotoState;
   readonly cVotante: CVotanteState;
+  readonly cAgenda: CAgendaState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -55,6 +60,7 @@ const rootReducer = combineReducers<IRootState>({
   cCliente,
   cDefensorVoto,
   cVotante,
+  cAgenda,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });
